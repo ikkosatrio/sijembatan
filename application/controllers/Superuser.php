@@ -115,6 +115,17 @@ class Superuser extends CI_Controller {
     }
     // End Config
 
+    function getjembatanjson(){
+        $jembatan  = $this->m_jembatan->tampil_data('jembatan')->result();
+        $arrJembatan = array();
+        foreach ($jembatan as $row){
+            $arrJembatan[] = $row;
+        }
+
+        echo goResult(200,"Success",$arrJembatan);
+        return;
+    }
+
     //
     public function jembatan($url=null,$id=null){
         $data             = $this->data;
@@ -204,7 +215,7 @@ class Superuser extends CI_Controller {
                 'jembatan_bang_atas_jenis'      => $atas_jenis,
                 'jembatan_bang_atas_kondisi' => $atas_kondisi,
                 'jembatan_bang_bawah_jenis' => $bawah_jenis,
-                'jembatan_bang_bawah_jenis' => $bawah_kondisi
+                'jembatan_bang_bawah_kondisi' => $bawah_kondisi
             );
 
             if($this->m_jembatan->update_data($where,$data,'jembatan')){
